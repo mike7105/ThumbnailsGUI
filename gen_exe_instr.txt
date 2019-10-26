@@ -1,0 +1,49 @@
+https://habr.com/ru/post/325626/
+https://pyinstaller.readthedocs.io/en/stable/usage.html
+
+O:
+cd O:\Мои документы\Учёба\Python\ex\Thimbnails
+pyinstaller --onefile thumb.py
+pause
+
+
+Собственно это и есть простейшая команда, которая соберет наш проект.
+Синтаксис команды pyinstaller таков:
+
+
+pyinstaller [options] script [script ...] | specfile
+
+
+Наиболее часто используемые опции:
+
+
+--onefile — сборка в один файл, т.е. файлы .dll не пишутся.
+--windowed -при запуске приложения, будет появляться консоль.
+--noconsole — при запуске приложения, консоль появляться не будет.
+--icon=app.ico — добавляем иконку в окно.
+--paths — возможность вручную прописать путь к необходимым файлам, если pyinstaller
+не может их найти(например: --paths D:\python35\Lib\site-packages\PyQt5\Qt\bin)
+
+
+PyInstaller анализирует файл myscript.py и делает следующее:
+
+
+Пишет файл myscript.spec в той же папке, где находится скрипт.
+Создает папку build в той же папке, где находится скрипт.
+Записывает некоторые логи и рабочие файлы в папку build.
+Создает папку dist в той же папке, где находится скрипт.
+Пишет исполняемый файл в папку dist.
+
+В итоге наша команда будет выглядеть так:
+
+
+pyinstaller --onefile --icon=name.ico --noconsole myscript.py
+
+pyinstaller --onefile ^
+--icon=modules\ico\app.ico ^
+--add-data="modules\ico\app.ico;modules\ico\app.ico" ^
+--add-data="modules\ico\open.png;modules\ico\open.png" ^
+--add-data="modules\ico\save.png;modules\ico\save.png" ^
+--add-data="modules\ico\about.png;modules\ico\about.png" ^
+ImageProcessing.pyw
+pause
