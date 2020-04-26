@@ -21,3 +21,9 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+*idea*
+*build*
+*__pycache__*
+*.zip
+*old*
+*imgs*
