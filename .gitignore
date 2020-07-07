@@ -27,3 +27,8 @@ $RECYCLE.BIN/
 *.zip
 *old*
 *imgs*
+*.bak
+*.dat
+*.dir
+*.bkp
+*.spec

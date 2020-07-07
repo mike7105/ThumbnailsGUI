@@ -15,6 +15,7 @@ class Thumb:
         suffix -- суффикс, который прибавится к имени исходного файла,
         чтобы получить выходной файл
        """
+
     def __init__(self):
         self.__size = (0, 0)
         self.__ftype = ""
@@ -120,8 +121,7 @@ class Thumb:
         """Из имени входного файла делает
         имя выходного файла, прибавляя суффикс"""
         file = os.path.splitext(os.path.basename(infile))[0]
-        return os.path.join(
-            self.__outdir, file + self.__suffix + "." + self.__otype)
+        return os.path.join(self.__outdir, file + self.__suffix + "." + self.__otype)
 
     def clear_outdir(self) -> None:
         """Очищает от файлов выбранного типа outdir"""
@@ -130,6 +130,7 @@ class Thumb:
                 os.remove(infile)
             # print("Cleared! " + self.__outdir)
             msgbox.showinfo("Ошибка!", "Cleared! " + self.__outdir)
+
 
 if __name__ == "__main__":
     pass
