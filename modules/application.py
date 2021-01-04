@@ -120,18 +120,6 @@ class Application(ttk.Notebook):
 
         self.mainmenu.add_cascade(label="Файл", menu=self.filemenu)
 
-        # Добавляем меню Настройки в главное меню
-        self.thememenu = tk.Menu(self.mainmenu, tearoff=False)
-        self.them = tk.StringVar()
-        self.them.set("vista")
-        self.tharr = ["default", "winnative", "clam", "alt", "classic", "vista", "xpnative"]
-
-        for s in self.tharr:
-            self.thememenu.add_radiobutton(
-                label=s, variable=self.them, value=s,
-                command=self.change_theme)
-        self.mainmenu.add_cascade(label="Темы", menu=self.thememenu)
-
         # Создаем подменю Справка
         self.helpmenu = tk.Menu(self.mainmenu, tearoff=False)
         self.helpmenu.add_command(
@@ -464,6 +452,9 @@ mailto:Mihail.Chesnokov@ipsos.com""", parent=self)
         self.tr = self.t2 - self.t1
         print(self.tr)
         self.lblStatus["text"] = f"Статус: [{self.pgb['maximum']}/{self.pgb['maximum']}]"
+        self.barrier.reset()
+        self.barrier.abort()
+
 
     def convertTH2(self):
         """Многопоточное конвертирование"""
@@ -478,8 +469,8 @@ mailto:Mihail.Chesnokov@ipsos.com""", parent=self)
             local.outfile = self.th.get_outfile(local.infile)
             local.im2.save(local.outfile)  # , quality=100)
             with self.lock:
+                self.lblStatus["text"] = f"Статус: [{self.varPB.get() + 1}/{self.pgb['maximum']}]"
                 self.pgb.step()
-                self.lblStatus["text"] = f"Статус: [{self.varPB.get()}/{self.pgb['maximum']}]"
             self.q.task_done()
         self.barrier.wait()
 
@@ -606,9 +597,9 @@ mailto:Mihail.Chesnokov@ipsos.com""", parent=self)
         self.clipboard_clear()
         self.clipboard_append(self.compToCopy)
 
-    def change_theme(self):
-        """меняет внешний вид при выборе встроенных тем"""
-        self.s.theme_use(self.them.get())
+    # def change_theme(self):
+    #     """меняет внешний вид при выборе встроенных тем"""
+    #     self.s.theme_use(self.them.get())
 
     # валидация
     def is_num(self, value) -> bool:
